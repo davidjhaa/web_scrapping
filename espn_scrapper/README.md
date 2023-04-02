@@ -1,5 +1,6 @@
 Given link of IPL 2022-2023 home page link.
-https://www.espncricinfo.com/series/ipl-2022-21-1210595.
+https://www.espncricinfo.com/series/ipl-2022-23-1210595.
+<br>
 scrapped the data of IPL(2022) from ESPN website
 
 1. Created a folder of ipl 2022.
