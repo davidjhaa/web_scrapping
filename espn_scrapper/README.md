@@ -10,4 +10,5 @@ in which the details of the player in the form of array of object where each obj
 Details of an object includes
     <br>
 	a. Runs, balls, sixes , fours, strike rate (sr) for that match
+    <br>
 	b. date ,venue ,result and opponent name for that match
