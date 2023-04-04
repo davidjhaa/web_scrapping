@@ -81,6 +81,71 @@ function getMatchDetails(html) {
         // console.log(pn);
         // console.log(pn.join(""));
         let playerName = "";
-      }
+        if (pn.includes("(")) {
+          playerName = pn.join("").split("(")[0];
+          // console.log(playerName);
+        } else if (pn.includes("†")) {
+          playerName = pn.join("").split("†")[0];
+          // console.log(playerName);
+        } else playerName = pn.join("");
+        //playerName = "hello"; //†
+        let runs = selecTool(row.find("td")[2]).text();
+        let balls = selecTool(row.find("td")[3]).text();
+        let numberOf4 = selecTool(row.find("td")[5]).text();
+        let numberOf6 = selecTool(row.find("td")[6]).text();
+        let sr = selecTool(row.find("td")[7]).text();
 
+        console.log(
+          `playerName -> ${playerName} runsScored ->  ${runs} ballsPlayed ->  ${balls} numbOfFours -> ${numberOf4} numbOfSixes -> ${numberOf6}  strikeRate-> ${sr}`
+        );
+
+        processInformation(
+          dateOfMatch,
+          venueOfMatch,
+          matchResult,
+          ownTeam,
+          opponentTeam,
+          playerName,
+          runs,
+          balls,
+          numberOf4,
+          numberOf6,
+          sr
+        );
+
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+      }
+    }
+  }
 }
+
+//this function reads the data from excel file
+function excelReader(playerPath, sheetName) {
+  if (!fs.existsSync(playerPath)) {
+    //if playerPath does not exists, this means that we have never placed any data into that file 
+    return [];
+  }
+  //if playerPath already has some data in it 
+  let workBook = xlsx.readFile(playerPath);
+  //A dictionary of the worksheets in the workbook. Use SheetNames to reference these.
+  let excelData = workBook.Sheets[sheetName];
+  let playerObj = xlsx.utils.sheet_to_json(excelData);
+  return playerObj;
+}
+
+function excelWriter(playerPath, jsObject, sheetName) {
+  //Creates a new workbook
+  let newWorkBook = xlsx.utils.book_new();
+  //Converts an array of JS objects to a worksheet.
+  let newWorkSheet = xlsx.utils.json_to_sheet(jsObject);
+  //it appends a worksheet to a workbook
+  xlsx.utils.book_append_sheet(newWorkBook, newWorkSheet, sheetName);
+  // Attempts to write or download workbook data to file
+  xlsx.writeFile(newWorkBook, playerPath);
+}
+
+//visit every scorecard and get info 
+module.exports = {
+    gifs:getInfoFromScorecard
+}
+
