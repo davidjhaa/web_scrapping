@@ -5,10 +5,10 @@ const path = require("path");
 const xlsx = require("xlsx");
 
 function getInfoFromScorecard(url) {
-      console.log("from scorecards.js ",url);
+      // console.log("from scorecards.js ",url);
         // we have a url of a scorecard, we want to get html of that scorecard
-      console.log("request received "+count);
-      request(url, cb);
+      // console.log("request received "+count);
+      // request(url, cb);
 }
 
 function cb(err,res,body) {
@@ -43,7 +43,7 @@ function getMatchDetails(html) {
       let matchResEle = selecTool(
         ".match-info.match-info-MATCH.match-info-MATCH-half-width>.status-text"
       );
-      let matchResult = matchResEle.text();;
+      let matchResult = matchResEle.text();
       console.log(matchResult);
     //4. get team names
     let teamNameArr = selecTool(".name-detail>.name-link");
